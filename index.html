@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Promotion Notice</title>
+
+<meta property="og:title" content="Promotion Notice">
+<meta property="og:description" content="Please be advised of an internal restructuring.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+/* ==========================================================================
+   EDIT EVERYTHING BETWEEN THE LINES BELOW. NOTHING ELSE NEEDS TOUCHING.
+   Keep the quote marks around each piece of text.
+   ========================================================================== */
+
+const CONFIG = {
+
+  // ---- Page 1: the memo header -------------------------------------------
+  memoDate:    "17 September 2026",
+  refNumber:   "REF: RAJ/2027/001",
+  memoFrom:    "Sarrvin & Civaanea",
+  memoTo:      "Family, friends and all interested parties",
+  memoSubject: "Internal restructuring",
+
+  // ---- Page 2: the appointments ------------------------------------------
+  parentOne:     "Civaanea Rajendran",
+  parentOneOld:  "Wife",
+  parentOneNew:  "Mother",
+
+  parentTwo:     "Sarrvin",
+  parentTwoOld:  "Husband",
+  parentTwoNew:  "Father",
+
+  effectiveDate: "May 2027",
+
+  // ---- Page 3: the picture -----------------------------------------------
+  // Put your image file in the SAME folder as this file and name it photo.jpg
+  // (or change the name below to match your file)
+  photoFile:    "photo.jpg",
+  photoCaption: "First scan. Already has opinions.",
+
+  // ---- Page 4: sign-off --------------------------------------------------
+  signOff:    "No action is required on your part.",
+  signOffSub: "Celebrations, however, are strongly encouraged.",
+  signature:  "Civaanea & Sarrvin",
+
+  // ---- Music -------------------------------------------------------------
+  // Put your music file in the SAME folder and name it music.mp3
+  // (or change the name below). Leave it as "" for no music.
+  musicFile: "music.mp3"
+
+};
+
+/* ==========================================================================
+   END OF EDITING
+   ========================================================================== */
+</script>
+
+<style>
+:root{
+  --ink:      #3A1A78;
+  --ink-soft: #7059AB;
+  --paper:    #F4F1FD;
+  --orchid:   #F0569B;
+  --peri:     #7B8CF7;
+  --peach:    #FFC77D;
+  --orange:   #FF6A2B;
+  --mint:     #55CFB4;
+
+  --pad: clamp(1.5rem, 6vw, 3.25rem);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ height:100%; overflow:hidden; }
+
+body{
+  background: var(--ink);
+  color: var(--ink);
+  font-family:"Space Mono", ui-monospace, monospace;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- deck ---------- */
+
+.deck{ position:fixed; inset:0; }
+
+.page{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center;
+  padding: calc(var(--pad) + env(safe-area-inset-top) + 2.25rem) var(--pad)
+           calc(var(--pad) + env(safe-area-inset-bottom) + 2.5rem);
+  opacity:0; visibility:hidden;
+  transition:opacity .5s ease, visibility .5s;
+  overflow-y:auto;
+}
+.page[data-on]{ opacity:1; visibility:visible; }
+.page > *{ position:relative; z-index:1; }
+
+#p1{ background: var(--paper); }
+#p2{ background: linear-gradient(158deg, #E6E3FF 0%, #FBDDEE 100%); }
+#p3{ background: linear-gradient(158deg, #FFF0D8 0%, #FFD9C2 100%); }
+#p4{ background: linear-gradient(168deg, #EDE7FB 0%, #D9C6F5 100%); color: var(--ink); }
+
+/* ---------- decoration: streamers + confetti ---------- */
+
+.decor{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.decor svg{ position:absolute; overflow:visible; }
+.streamers-t{ top:-8px; left:0; width:100%; }
+.streamers-b{ bottom:-8px; left:0; width:100%; transform:scaleY(-1); }
+.decor path{ fill:none; stroke-linecap:round; }
+
+.decor i{
+  position:absolute; display:block;
+  opacity:0;
+}
+[data-on] .decor i{ animation: flutter .95s cubic-bezier(.18,.85,.3,1) both; }
+
+@keyframes flutter{
+  from{ opacity:0; transform: translateY(-44px) rotate(0deg) scale(.6); }
+  to  { opacity:var(--o,.85); transform: translateY(0) rotate(var(--r,0deg)) scale(1); }
+}
+
+/* ---------- type ---------- */
+
+.serif{ font-family:"Fraunces", Georgia, serif; }
+
+.meta{
+  font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+  color: var(--ink-soft);
+}
+
+.rule{ height:2px; background:var(--ink); opacity:.85; }
+.rule-thin{ height:1px; background:var(--ink); opacity:.2; }
+
+/* ---------- page 1 ---------- */
+
+.letterhead{ display:flex; justify-content:space-between; gap:1rem; align-items:baseline; }
+
+.title{
+  font-family:"Fraunces", Georgia, serif;
+  font-weight:700;
+  font-size: clamp(2.9rem, 15vw, 6.5rem);
+  line-height:.88; letter-spacing:-.03em;
+  margin:.55em 0 .35em;
+}
+.title em{ font-style:normal; display:block; color: var(--orchid); }
+
+.fields{ display:grid; gap:.7rem; margin-top:1.6rem; }
+.field{ display:grid; grid-template-columns:5.5rem 1fr; gap:.75rem; align-items:start; }
+.field dt{ font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); padding-top:.2em; }
+.field dd{ font-size:.9375rem; line-height:1.45; }
+
+/* ---------- page 2 ---------- */
+
+.lede{
+  font-family:"Fraunces", Georgia, serif;
+  font-size: clamp(1.25rem, 5.2vw, 1.9rem);
+  line-height:1.35; max-width:26ch; margin-bottom:2.25rem;
+}
+
+.appt{ padding:1.4rem 0; border-top:1px solid rgba(58,26,120,.2); }
+.appt:last-of-type{ border-bottom:1px solid rgba(58,26,120,.2); }
+
+.appt-name{
+  font-family:"Fraunces", Georgia, serif;
+  font-size: clamp(1.35rem, 6vw, 2rem);
+  font-weight:600; line-height:1.1;
+}
+
+.appt-move{ display:flex; align-items:center; flex-wrap:wrap; gap:.6rem; margin-top:.7rem; }
+
+.old{ font-size:.9375rem; color:var(--ink-soft); position:relative; display:inline-block; }
+.old::after{
+  content:""; position:absolute; left:-.1em; right:-.1em; top:52%; height:2px;
+  background:var(--ink-soft); transform:scaleX(0); transform-origin:left;
+  transition:transform .45s ease .35s;
+}
+[data-on] .old::after{ transform:scaleX(1); }
+
+.arrow{ color:var(--ink-soft); font-size:.9375rem; }
+
+.new{
+  font-family:"Fraunces", Georgia, serif;
+  font-size: clamp(1.05rem, 4.6vw, 1.4rem);
+  font-weight:700; color:#fff; background:var(--orange);
+  border-radius:3px; padding:.2em .6em .26em;
+  box-shadow:0 5px 16px rgba(255,106,43,.42);
+  transform:rotate(-2.5deg) scale(1.5); opacity:0;
+  transition:transform .4s cubic-bezier(.2,1.3,.4,1) .85s, opacity .25s ease .85s;
+}
+[data-on] .new{ transform:rotate(-2.5deg) scale(1); opacity:1; }
+.appt:nth-of-type(2) .new{ transition-delay:1.15s; background:var(--orchid); box-shadow:0 5px 16px rgba(240,86,155,.42); }
+.appt:nth-of-type(2) .old::after{ transition-delay:.6s; }
+
+.effective{ margin-top:1.5rem; font-size:.875rem; color:var(--ink-soft); }
+.effective b{ color:var(--ink); }
+
+/* ---------- page 3 ---------- */
+
+.frame{
+  align-self:center;
+  width:min(76vw, 292px);
+  aspect-ratio:3/4;
+  border-radius:50% 50% 6px 6px / 32% 32% 6px 6px;
+  overflow:hidden; background:#FBE6C9;
+  border:6px solid #fff;
+  box-shadow:0 16px 38px rgba(58,26,120,.2);
+  transform:rotate(-1.5deg);
+  display:flex; align-items:center; justify-content:center;
+}
+.frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+.frame-empty{ padding:1.5rem; text-align:center; font-size:.75rem; line-height:1.6; color:#A87C43; letter-spacing:.06em; }
+
+.caption{
+  align-self:center; text-align:center; margin-top:1.5rem; max-width:24ch;
+  font-family:"Fraunces", Georgia, serif; font-size:1.0625rem; line-height:1.45;
+}
+.hire{ align-self:center; text-align:center; margin-bottom:1.5rem; }
+.hire .meta{ margin-bottom:.5rem; }
+.hire strong{
+  font-family:"Fraunces", Georgia, serif; font-weight:700;
+  font-size:clamp(1.5rem, 6.5vw, 2.1rem); letter-spacing:-.01em; color:var(--orange);
+}
+
+/* ---------- page 4 ---------- */
+
+.close{
+  font-family:"Fraunces", Georgia, serif;
+  font-size:clamp(1.5rem, 6.5vw, 2.2rem);
+  line-height:1.25; max-width:20ch; font-weight:600;
+}
+.close-sub{
+  margin-top:1rem; font-family:"Fraunces", Georgia, serif;
+  font-size:clamp(1.125rem, 4.8vw, 1.4rem);
+  line-height:1.4; color:var(--orange); max-width:22ch;
+}
+.sig{ margin-top:2.75rem; }
+.sig .meta{ color:var(--ink-soft); }
+.sig-name{ margin-top:.6rem; font-family:"Fraunces", Georgia, serif; font-size:1.25rem; color:var(--orange); }
+
+/* ---------- chrome ---------- */
+
+.dots{
+  position:fixed; z-index:5;
+  top:calc(env(safe-area-inset-top) + .9rem); left:50%; transform:translateX(-50%);
+  display:flex; gap:.4rem;
+}
+.dot{ width:22px; height:3px; border-radius:2px; background:currentColor; opacity:.22; transition:opacity .3s; }
+.dot[data-on]{ opacity:.9; }
+.dots,.hint{ color:var(--ink); transition:color .5s; }
+body[data-dark] .dots, body[data-dark] .hint{ color:var(--paper); }
+
+.hint{
+  position:fixed; z-index:5;
+  bottom:calc(env(safe-area-inset-bottom) + 1.1rem); left:50%; transform:translateX(-50%);
+  font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+  opacity:.5; white-space:nowrap; transition:opacity .4s, color .5s;
+}
+.hint[data-hide]{ opacity:0; }
+
+.tap{ position:fixed; inset:0; z-index:3; display:flex; }
+.tap button{ flex:1; border:0; background:transparent; cursor:pointer; padding:0; -webkit-appearance:none; font:inherit; color:transparent; }
+.tap button:first-child{ flex:.32; }
+.tap button:focus-visible{ outline:3px solid var(--orange); outline-offset:-6px; }
+
+.music{
+  position:fixed; z-index:6;
+  bottom:calc(env(safe-area-inset-bottom) + .85rem);
+  right:calc(env(safe-area-inset-right) + .85rem);
+  width:40px; height:40px; border-radius:50%;
+  border:1.5px solid currentColor; background:rgba(255,255,255,.6);
+  color:var(--ink); cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  backdrop-filter:blur(6px); transition:color .5s, background .5s;
+}
+body[data-dark] .music{ color:var(--paper); background:rgba(58,26,120,.45); }
+.music svg{ width:17px; height:17px; fill:currentColor; }
+.music .on{ display:none; }
+.music[data-playing] .on{ display:block; }
+.music[data-playing] .off{ display:none; }
+.music:focus-visible{ outline:3px solid var(--orange); outline-offset:3px; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::after{ transition-duration:.01ms !important; }
+  .new{ opacity:1; transform:rotate(-2.5deg); }
+  .old::after{ transform:scaleX(1); }
+  [data-on] .decor i{ animation:none; opacity:var(--o,.85); transform:rotate(var(--r,0deg)); }
+}
+</style>
+</head>
+<body>
+
+<div class="dots" id="dots" aria-hidden="true"></div>
+
+<main class="deck">
+
+  <!-- 1 -->
+  <section class="page" id="p1" data-on>
+    <div class="letterhead">
+      <span class="meta" data-f="refNumber"></span>
+      <span class="meta" data-f="memoDate"></span>
+    </div>
+    <div class="rule" style="margin-top:.6rem"></div>
+
+    <h1 class="title">Promotion<em>Notice</em></h1>
+
+    <div class="rule-thin"></div>
+
+    <dl class="fields">
+      <div class="field"><dt>From</dt><dd data-f="memoFrom"></dd></div>
+      <div class="field"><dt>To</dt><dd data-f="memoTo"></dd></div>
+      <div class="field"><dt>Re</dt><dd data-f="memoSubject"></dd></div>
+    </dl>
+  </section>
+
+  <!-- 2 -->
+  <section class="page" id="p2" data-decor="light">
+    <p class="lede">Please be advised that the following appointments have been confirmed.</p>
+
+    <div class="appt">
+      <div class="appt-name" data-f="parentOne"></div>
+      <div class="appt-move">
+        <span class="old" data-f="parentOneOld"></span>
+        <span class="arrow">&#8594;</span>
+        <span class="new" data-f="parentOneNew"></span>
+      </div>
+    </div>
+
+    <div class="appt">
+      <div class="appt-name" data-f="parentTwo"></div>
+      <div class="appt-move">
+        <span class="old" data-f="parentTwoOld"></span>
+        <span class="arrow">&#8594;</span>
+        <span class="new" data-f="parentTwoNew"></span>
+      </div>
+    </div>
+
+    <p class="effective">Effective <b data-f="effectiveDate"></b>.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="page" id="p3" data-decor="light">
+    <div class="hire">
+      <div class="meta">Joining the team</div>
+      <strong data-f="effectiveDate"></strong>
+    </div>
+    <div class="frame" id="frame">
+      <div class="frame-empty" id="frameEmpty">
+        Drop your photo in this folder<br>and name it photo.jpg
+      </div>
+    </div>
+    <p class="caption" data-f="photoCaption"></p>
+  </section>
+
+  <!-- 4 -->
+  <section class="page" id="p4" data-decor="light">
+    <p class="close" data-f="signOff"></p>
+    <p class="close-sub" data-f="signOffSub"></p>
+    <div class="sig">
+      <div class="rule-thin" style="margin-bottom:1rem"></div>
+      <div class="meta">Signed</div>
+      <div class="sig-name" data-f="signature"></div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tap">
+  <button id="prev" aria-label="Previous page">Previous</button>
+  <button id="next" aria-label="Next page">Next</button>
+</nav>
+
+<p class="hint" id="hint">Tap to continue</p>
+
+<button class="music" id="music" aria-label="Play or pause music">
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.6A4 4 0 1 0 14 17V7h5V3h-7z"/></svg>
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zm7 0h3v14h-3z"/></svg>
+</button>
+
+<audio id="audio" loop preload="none"></audio>
+
+<script>
+(function(){
+
+  /* ---------- fill in text ---------- */
+  document.querySelectorAll('[data-f]').forEach(function(el){
+    var v = CONFIG[el.getAttribute('data-f')];
+    if (v !== undefined) el.textContent = v;
+  });
+
+  /* ---------- photo ---------- */
+  if (CONFIG.photoFile) {
+    var img = new Image();
+    img.onload = function(){
+      var f = document.getElementById('frame');
+      f.innerHTML = '';
+      img.alt = CONFIG.photoCaption || '';
+      f.appendChild(img);
+    };
+    img.src = CONFIG.photoFile;
+  }
+
+  /* ---------- streamers + confetti ---------- */
+
+  var PALETTE = {
+    light: ['#F0569B','#7B8CF7','#FF6A2B','#FFC77D','#55CFB4','#3A1A78'],
+    dark:  ['#FFC77D','#F0569B','#7B8CF7','#FF6A2B','#55CFB4','#FFFFFF']
+  };
+
+  function rand(a,b){ return a + Math.random()*(b-a); }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+  function streamerSet(colors, cls){
+    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('class', cls);
+    svg.setAttribute('viewBox','0 0 400 150');
+    svg.setAttribute('preserveAspectRatio','none');
+    svg.setAttribute('height','150');
+    var xs = [14, 62, 128, 196, 258, 320, 378];
+    xs.forEach(function(x, n){
+      var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+      var amp = rand(9, 20), len = rand(58, 138), step = len/3;
+      var d = 'M'+x+' -10 '
+            + 'C'+(x+amp)+' '+(step*0.6)+', '+(x-amp)+' '+(step*1.2)+', '+x+' '+(step*1.8)+' '
+            + 'C'+(x+amp)+' '+(step*2.4)+', '+(x-amp)+' '+(step*3.0)+', '+x+' '+len;
+      p.setAttribute('d', d);
+      p.setAttribute('stroke', colors[n % colors.length]);
+      p.setAttribute('stroke-width', rand(3.5, 6).toFixed(1));
+      p.setAttribute('opacity', rand(.45, .8).toFixed(2));
+      svg.appendChild(p);
+    });
+    return svg;
+  }
+
+  function decorate(page){
+    var mode = page.getAttribute('data-decor');
+    if (!mode) return;
+    var colors = PALETTE[mode];
+
+    var decor = document.createElement('div');
+    decor.className = 'decor';
+    decor.setAttribute('aria-hidden','true');
+
+    decor.appendChild(streamerSet(colors, 'streamers-t'));
+    decor.appendChild(streamerSet(colors, 'streamers-b'));
+
+    for (var n = 0; n < 26; n++){
+      var c = document.createElement('i');
+      var colour = pick(colors);
+      var shape  = Math.random();
+      var w = rand(6, 13), h = rand(6, 15);
+
+      c.style.left = rand(2, 95).toFixed(1) + '%';
+      c.style.top  = rand(3, 96).toFixed(1) + '%';
+      c.style.width  = w.toFixed(1) + 'px';
+      c.style.height = (shape < .3 ? w : h).toFixed(1) + 'px';
+      c.style.background = colour;
+      c.style.setProperty('--r', rand(-70, 70).toFixed(0) + 'deg');
+      c.style.setProperty('--o', rand(.45, .9).toFixed(2));
+      c.style.animationDelay = rand(0, .5).toFixed(2) + 's';
+
+      if (shape < .3)      c.style.borderRadius = '50%';
+      else if (shape < .62) c.style.borderRadius = '2px';
+      else { c.style.width = rand(3,5).toFixed(1)+'px'; c.style.borderRadius='3px'; }
+
+      decor.appendChild(c);
+    }
+
+    page.insertBefore(decor, page.firstChild);
+  }
+
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  pages.forEach(decorate);
+
+  /* ---------- paging ---------- */
+
+  var i = 0;
+  var dots = document.getElementById('dots');
+  pages.forEach(function(){
+    var d = document.createElement('span');
+    d.className = 'dot';
+    dots.appendChild(d);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+  dotEls[0].setAttribute('data-on','');
+
+  var hint = document.getElementById('hint');
+
+  function show(n){
+    n = Math.max(0, Math.min(pages.length - 1, n));
+    if (n === i) return;
+    i = n;
+    pages.forEach(function(p,k){
+      if (k === i) p.setAttribute('data-on',''); else p.removeAttribute('data-on');
+    });
+    dotEls.forEach(function(d,k){
+      if (k === i) d.setAttribute('data-on',''); else d.removeAttribute('data-on');
+    });
+    if (pages[i].getAttribute('data-decor') === 'dark') document.body.setAttribute('data-dark','');
+    else document.body.removeAttribute('data-dark');
+    if (i > 0) hint.setAttribute('data-hide','');
+    pages[i].scrollTop = 0;
+  }
+
+  document.getElementById('next').addEventListener('click', function(){ show(i+1); });
+  document.getElementById('prev').addEventListener('click', function(){ show(i-1); });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i+1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(i-1); }
+  });
+
+  var x0 = null, y0 = null;
+  document.addEventListener('touchstart', function(e){
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    var dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(dx < 0 ? i+1 : i-1);
+    x0 = null;
+  }, {passive:true});
+
+  /* ---------- music ---------- */
+
+  var audio = document.getElementById('audio');
+  var btn = document.getElementById('music');
+  if (CONFIG.musicFile) {
+    audio.src = CONFIG.musicFile;
+    btn.style.display = 'flex';
+    btn.addEventListener('click', function(){
+      if (audio.paused) {
+        audio.play().then(function(){ btn.setAttribute('data-playing',''); }).catch(function(){});
+      } else {
+        audio.pause();
+        btn.removeAttribute('data-playing');
+      }
+    });
+    document.addEventListener('click', function once(){
+      audio.play().then(function(){ btn.setAttribute('data-playing',''); }).catch(function(){});
+      document.removeEventListener('click', once);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
